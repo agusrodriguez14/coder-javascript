@@ -43,7 +43,7 @@ const productoCatalogoHTML = (producto) => {
 
 
   //mostrar listado filtrado
-
+///asdasd
 
 const mostrarFrutas = () => {
 
@@ -82,30 +82,24 @@ const mostrarVerduras = () => {
 
     }
 
-    const filtro = (tipoFiltro) => {
-        const listaFiltrada = productos.filter((producto)=>producto.categoria.includes(tipoFiltro));
-
-        return listaFiltrada;
-    }
-
   
   
 
 const mostrarBolsones = () => {
      
-    const listaFiltrada = filtro("bolson");
+    listaFiltrada = productos.filter((producto)=>producto.categoria.includes("bolson"));
     
     const catalogoNodo = document.getElementById("catalogo");
     let catalogoHTML = "";
   
     for (const producto of listaFiltrada) {
-      catalogoHTML += productoCatalogoHTML(producto);  
-    }  
+      catalogoHTML += productoCatalogoHTML(producto);
+    }
   
     catalogoNodo.innerHTML = catalogoHTML;
     botonesCatalogo(listaFiltrada);
 
-}    
+}
 
 
 

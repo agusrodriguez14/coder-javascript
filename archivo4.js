@@ -11,8 +11,7 @@ const productos = [
 
   ];
 
-
-  
+ 
 
   let contadorCarrito = 0;
   const carrito = [];
@@ -35,19 +34,22 @@ const productoCatalogoHTML = (producto) => {
 
     return `
             <div >
-            <h5 >${producto.nombre}</h5>
-            <button id="btn-carrito-${producto.idCompra}">Quitar</button>
+            <h5 >${producto.nombre}  x ${producto.contador}</h5>
+            
+            
+            <button id="btn-carrito-${producto.idCompra}">Quitar Unidad</button>
             </div>`;
   };
  
 
 
   //mostrar listado filtrado
-///asdasd
+
 
 const mostrarFrutas = () => {
-
-        console.log("mostrarFrutas prod", productos)
+        const catalogo = document.getElementById("catalogo");
+        catalogo.style.display = "block";
+        
         
         let  listaFiltrada = productos.filter((producto)=>producto.categoria.includes("fruta"));
 
@@ -55,7 +57,7 @@ const mostrarFrutas = () => {
         let catalogoHTML = "";
         
         for (const producto of listaFiltrada) {
-        console.log("producto al template", producto)
+        
 
           catalogoHTML += productoCatalogoHTML(producto);
         }
@@ -68,7 +70,8 @@ const mostrarFrutas = () => {
 
 
 const mostrarVerduras = () => {
-        
+        const catalogo = document.getElementById("catalogo");
+        nodocatalogo.style.display = "block"
         let  listaFiltrada = productos.filter((producto)=>producto.categoria.includes("verdura"));
         const catalogoNodo = document.getElementById("catalogo");
         let catalogoHTML = "";
@@ -86,7 +89,8 @@ const mostrarVerduras = () => {
   
 
 const mostrarBolsones = () => {
-     
+    const catalogo = document.getElementById("catalogo");
+    catalogo.style.display = "block" 
     listaFiltrada = productos.filter((producto)=>producto.categoria.includes("bolson"));
     
     const catalogoNodo = document.getElementById("catalogo");
@@ -154,40 +158,88 @@ function mostrarCarrito () {
     let precio = 0;
     for (const producto of carrito) {
       carritoHTML += productoCarritoHTML(producto);
-      precio += producto.precio;
+      precio += (producto.precio) * (producto.contador);
     }
   
     precioNodo.innerHTML = precio;
     carritoNodo.innerHTML = carritoHTML;
-    //botonesCarrito();
+    botonesCarrito();
+   
+
+    
+}
+
+   
 
     
 
 
     
 
-  };
+
 
   //////
 
   function botonesCatalogo(listaFiltradaDeProductos)  {
 
     for (const producto of listaFiltradaDeProductos) {
+     
+      const idBoton = producto.id;
       const botonId = `btn-catalogo-${producto.id}`;
+      const botonNodo = document.getElementById(botonId);
+
+  
+      botonNodo.addEventListener("click", () => {
+        const resultado = carrito.find(producto2 => producto2.id === idBoton);
+        
+        
+        
+        if (resultado == undefined){
+        
+          const productoCarrito = {
+            id:producto.id,
+            nombre: producto.nombre,
+            idCompra: contadorCarrito,
+            precio: producto.precio,
+            contador:1,
+            
+          };
+    
+          contadorCarrito += 1;
+          carrito.push(productoCarrito);
+        
+        }else{
+
+          resultado.contador=resultado.contador+1;
+          
+
+        }
+
+     
+    }
+      )
+
+  }}
+
+
+  const botonesCarrito = () => {
+    for (const producto of carrito) {
+      const botonId = `btn-carrito-${producto.idCompra}`;
       const botonNodo = document.getElementById(botonId);
   
       botonNodo.addEventListener("click", () => {
-        const productoCarrito = {
-          nombre: producto.nombre,
-          idCompra: contadorCarrito,
-          precio: producto.precio,
-        };
-  
-        contadorCarrito += 1;
-        carrito.push(productoCarrito);
-        
+        const index = carrito.findIndex((p) => p.idCompra == producto.idCompra);
+
+        if(producto.contador>1){
+          producto.contador = producto.contador-1;
+          mostrarCarrito();
+
+        }else{
+        carrito.splice(index, 1);
+        mostrarCarrito();
+        }
       });
     }
   };
 
-
+ 

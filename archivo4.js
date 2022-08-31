@@ -11,6 +11,8 @@ const productos = [
 
   ];
 
+  const {id,nombre,precio,categoria} = productos;
+
  
 
   let contadorCarrito = 0;
@@ -41,73 +43,35 @@ const productoCatalogoHTML = (producto) => {
             </div>`;
   };
  
+        const varVerdura = "verdura";
+        const varBolson = "bolson";
+        const varFruta = "fruta";
 
-
-  //mostrar listado filtrado
-
-
-const mostrarFrutas = () => {
-        const catalogo = document.getElementById("catalogo");
-        catalogo.style.display = "block";
-        
-        
-        let  listaFiltrada = productos.filter((producto)=>producto.categoria.includes("fruta"));
-
-        const catalogoNodo = document.getElementById("catalogo");
-        let catalogoHTML = "";
-        
-        for (const producto of listaFiltrada) {
-        
-
-          catalogoHTML += productoCatalogoHTML(producto);
-        }
-      
-        catalogoNodo.innerHTML = catalogoHTML;
-        botonesCatalogo(listaFiltrada);
-      };
-
-      
-
-
-const mostrarVerduras = () => {
+        //mostrar listado filtrado
+        function mostrarListas(tipo) 
+        {
         const catalogo = document.getElementById("catalogo");
         nodocatalogo.style.display = "block"
-        let  listaFiltrada = productos.filter((producto)=>producto.categoria.includes("verdura"));
+        let  listaFiltrada = productos.filter((producto)=>producto.categoria.includes(tipo));
         const catalogoNodo = document.getElementById("catalogo");
         let catalogoHTML = "";
       
-        for (const producto of listaFiltrada) {
-          catalogoHTML += productoCatalogoHTML(producto);
-        }
-      
+        for (const producto of listaFiltrada)
+        {catalogoHTML += productoCatalogoHTML(producto);}
+        
         catalogoNodo.innerHTML = catalogoHTML;
         botonesCatalogo(listaFiltrada);
+        }
 
-    }
-
-  
-  
-
-const mostrarBolsones = () => {
-    const catalogo = document.getElementById("catalogo");
-    catalogo.style.display = "block" 
-    listaFiltrada = productos.filter((producto)=>producto.categoria.includes("bolson"));
-    
-    const catalogoNodo = document.getElementById("catalogo");
-    let catalogoHTML = "";
-  
-    for (const producto of listaFiltrada) {
-      catalogoHTML += productoCatalogoHTML(producto);
-    }
-  
-    catalogoNodo.innerHTML = catalogoHTML;
-    botonesCatalogo(listaFiltrada);
-
-}
-
-
-
-
+        const mostrarFrutas = () => {
+        mostrarListas(varFruta);
+        };
+        const mostrarVerduras = () => {
+        mostrarListas(varVerdura);
+        }
+        const mostrarBolsones = () => {
+        mostrarListas(varBolson);
+        }
 
 
 const mostrarTodo = () => {
@@ -123,30 +87,28 @@ const mostrarTodo = () => {
         }
       
         catalogoNodo.innerHTML = catalogoHTML;
-        botonesCatalogo(productos);
+        botonesCatalogo();
    
 
 }   
                         
 
-let listadogeneral = document.getElementById("btnGeneral");
-listadogeneral.addEventListener("click", mostrarTodo);
+    let listadogeneral = document.getElementById("btnGeneral");
+    listadogeneral.addEventListener("click", mostrarTodo);
 
-let listadoVerduras = document.getElementById("btnVerduras");
-listadoVerduras.addEventListener("click", mostrarVerduras);
+    let listadoVerduras = document.getElementById("btnVerduras");
+    listadoVerduras.addEventListener("click", mostrarVerduras);
 
-let listadoBolsones = document.getElementById("btnBolsones");
-listadoBolsones.addEventListener("click", mostrarBolsones);
+    let listadoBolsones = document.getElementById("btnBolsones");
+    listadoBolsones.addEventListener("click", mostrarBolsones);
 
-let listadoFrutas = document.getElementById("btnFrutas");
-listadoFrutas.addEventListener("click", mostrarFrutas); 
+    let listadoFrutas = document.getElementById("btnFrutas");
+    listadoFrutas.addEventListener("click", mostrarFrutas); 
 
-///////
+    let listadoCarrito = document.getElementById("btnCarrito");
+    listadoCarrito.addEventListener("click", mostrarCarrito);
 
-
-
-let listadoCarrito = document.getElementById("btnCarrito");
-listadoCarrito.addEventListener("click", mostrarCarrito);
+//////
 
 function mostrarCarrito () {
     const catalogo = document.getElementById("catalogo");
@@ -164,21 +126,8 @@ function mostrarCarrito () {
     precioNodo.innerHTML = precio;
     carritoNodo.innerHTML = carritoHTML;
     botonesCarrito();
-   
-
-    
-}
-
-   
-
-    
-
-
-    
-
-
-
-  //////
+   }
+ //////
 
   function botonesCatalogo(listaFiltradaDeProductos)  {
 
@@ -210,34 +159,32 @@ function mostrarCarrito () {
         
         }else{
 
-          resultado.contador=resultado.contador+1;
+          resultado.contador++;
           
 
         }
 
-     
     }
       )
 
   }}
 
 
-  const botonesCarrito = () => {
-    for (const producto of carrito) {
+      const botonesCarrito = () => {
+      for (const producto of carrito) {
       const botonId = `btn-carrito-${producto.idCompra}`;
       const botonNodo = document.getElementById(botonId);
   
       botonNodo.addEventListener("click", () => {
-        const index = carrito.findIndex((p) => p.idCompra == producto.idCompra);
+      const index = carrito.findIndex((p) => p.idCompra == producto.idCompra);
 
-        if(producto.contador>1){
-          producto.contador = producto.contador-1;
-          mostrarCarrito();
+        producto.contador>1 ? 
+        (producto.contador--, mostrarCarrito()) 
+        : 
+        (carrito.splice(index, 1),mostrarCarrito());
 
-        }else{
-        carrito.splice(index, 1);
-        mostrarCarrito();
-        }
+
+
       });
     }
   };

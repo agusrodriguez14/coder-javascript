@@ -51,7 +51,7 @@ const productoCatalogoHTML = (producto) => {
         function mostrarListas(tipo) 
         {
         const catalogo = document.getElementById("catalogo");
-        nodocatalogo.style.display = "block"
+        catalogo.style.display = "block"
         let  listaFiltrada = productos.filter((producto)=>producto.categoria.includes(tipo));
         const catalogoNodo = document.getElementById("catalogo");
         let catalogoHTML = "";
@@ -60,7 +60,7 @@ const productoCatalogoHTML = (producto) => {
         {catalogoHTML += productoCatalogoHTML(producto);}
         
         catalogoNodo.innerHTML = catalogoHTML;
-        botonesCatalogo(listaFiltrada);
+        return botonesCatalogo(listaFiltrada);
         }
 
         const mostrarFrutas = () => {
@@ -87,7 +87,7 @@ const mostrarTodo = () => {
         }
       
         catalogoNodo.innerHTML = catalogoHTML;
-        botonesCatalogo();
+        botonesCatalogo(productos);
    
 
 }   
@@ -107,6 +107,7 @@ const mostrarTodo = () => {
 
     let listadoCarrito = document.getElementById("btnCarrito");
     listadoCarrito.addEventListener("click", mostrarCarrito);
+
 
 //////
 
@@ -150,24 +151,17 @@ function mostrarCarrito () {
             nombre: producto.nombre,
             idCompra: contadorCarrito,
             precio: producto.precio,
-            contador:1,
-            
-          };
-    
+            contador:1,   
+          };    
           contadorCarrito += 1;
           carrito.push(productoCarrito);
         
-        }else{
+        }else{resultado.contador++;}
+    });
+    };
+      
 
-          resultado.contador++;
-          
-
-        }
-
-    }
-      )
-
-  }}
+  }
 
 
       const botonesCarrito = () => {

@@ -13,6 +13,36 @@ const productos = [
 
   const {id,nombre,precio,categoria} = productos;
 
+  const Toast = {
+    init() {
+      this.hideTimeout = null;
+  
+      this.el = document.createElement("div");
+      this.el.className = "toast";
+      document.body.appendChild(this.el);
+    },
+  
+    show(message, state) {
+      clearTimeout(this.hideTimeout);
+  
+      this.el.textContent = message;
+      this.el.className = "toast toast--visible";
+  
+      if (state) {
+        this.el.classList.add(`toast--${state}`);
+      }
+  
+      this.hideTimeout = setTimeout(() => {
+        this.el.classList.remove("toast--visible");
+      }, 3000);
+    }
+  };
+  
+  document.addEventListener("DOMContentLoaded", () => Toast.init());
+
+  
+  
+
  
 
   let contadorCarrito = 0;
@@ -141,7 +171,7 @@ function mostrarCarrito () {
   
       botonNodo.addEventListener("click", () => {
         const resultado = carrito.find(producto2 => producto2.id === idBoton);
-        
+        Toast.show("Producto agregado","success");
         
         
         if (resultado == undefined){
@@ -171,7 +201,7 @@ function mostrarCarrito () {
   
       botonNodo.addEventListener("click", () => {
       const index = carrito.findIndex((p) => p.idCompra == producto.idCompra);
-
+      Toast.show("Producto eliminado","error");
         producto.contador>1 ? 
         (producto.contador--, mostrarCarrito()) 
         : 
@@ -183,4 +213,4 @@ function mostrarCarrito () {
     }
   };
 
- 
+  

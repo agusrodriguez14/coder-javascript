@@ -14,9 +14,10 @@
 <button style="width:100px;margin: 10px 0px;padding: 10px;background:#000;color:#fff;border:solid 1px #000;" id="btnVerduras">Verduras</button>
 <button style="width:100px;margin: 10px 0px;padding: 10px;background:#000;color:#fff;border:solid 1px #000;" id="btnBolsones">Bolsones</button>
 <button style="width:100px;margin: 10px 0px;padding: 10px;background:forestgreen;color:#fff;border:solid 1px #000;" id="btnCarrito">Mi Carrito</button>
+
 </div>
-<div id="nodocatalogo">
-<h1>catalogo</h1>
+<div id="nodocatalogo"></div>
+<h1 id="labelCatalogo">Catalogo</h1>
 <div id="catalogo" >
 	
 
@@ -24,12 +25,66 @@
 </div>
 </b>
 <br>
-<h1>carrito</h1>
-<div id="carrito">  </div>
+<h1 id="labelCarrito">Carrito</h1>
+<br>
+<div id="carrito">  
+	
+</div>
+<h1 id="labelCarrito2">Total Compra:$</h1>
+
 <div id="precioTotal">  </div>
+<br>
+<button  id="btnEnviar">Terminar Pedido</button>
+
+<div id="form" display="none">
+	
+	<br>
+	  <label >Tu Nombre:</label>
+	  <input   id="to_name">
+
+	  <br>
+	
+	  <label >Tu Email:</label>
+	  <input  id="email_to">
+	
+	  <br>
+	  <label >Te llegara un mail con el detalle de tu compra</label>
+	  <br>
+	<button  id="enviarFormulario" >Enviar </button>
+	
+</div>
+
+
+
+
+
+
+	  
+	  
+	  
+	 
+
+
+
+
+
+
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("yEX03XlMoESSGuhCX");
+   })();
+</script>
+
 
 
 <script src="archivo4.js"></script>
+
+
+
 
 </body>
 </html>

@@ -1,33 +1,22 @@
-import './App.css';
-import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListCointainer';
+import "./App.css";
+import NavBar from "./components/NavBar";
+import ItemListContainer from "./components/ItemListContainer";
+import ItemDetailContainer from "./components/ItemDetailContainer";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const title= "Bienvenidos a mi Clase de JSX"
-
-function handleClick(){
-alert("clickeaste")
-}
-
-let user = {name: "agustin", edad: "33"};
-const misEstilos ={
-color: "#cc56ee"
-
-
-}
   return (
-<div>
-<nav>
- 
-  </nav>
     <div className="App">
-      
-      <header className="App-header">
-      <NavBar></NavBar>
-      </header>
-      <ItemListContainer></ItemListContainer>
-    </div>
+      <BrowserRouter>
+        <NavBar />
+
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/category/:categoryid" element={<ItemListContainer />} />
+          <Route path="/detalle/:id" element={<ItemDetailContainer />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

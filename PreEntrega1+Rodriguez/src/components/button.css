@@ -1,10 +1,10 @@
-.btn{
-    padding: 5px 15px;
-    color: rgb(185, 47, 47);
-    max-width: 250px;
-    background-color: rgb(191, 118, 58);
-    border-radius:  4px; 
-    border: none;
-    margin: 5px 15px;
-    cursor: pointer;
-  }
+.btn {
+  padding: 5px 15px;
+  color: rgb(6, 0, 0);
+  max-width: 250px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 4px;
+  border: none;
+  margin: 5px 15px;
+  cursor: pointer;
+}

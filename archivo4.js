@@ -1,10 +1,10 @@
 
 //todos los productos
 const productos = [
-    {id: 1 ,nombre: "Naranja", precio: 50, categoria:"fruta,suelto"},
-    {id: 2 ,nombre: "Manzana", precio: 60,categoria:"fruta,suelto"},
-    {id: 3 ,nombre: "Banana", precio: 70,categoria:"fruta,suelto"},
-    {id: 4 ,nombre: "Acelga", precio: 80,categoria:"verdura,suelto"},
+    {id: 1 ,nombre: "Naranja", precio: 50, categoria:"fruta"},
+    {id: 2 ,nombre: "Manzana", precio: 60,categoria:"fruta"},
+    {id: 3 ,nombre: "Banana", precio: 70,categoria:"fruta"},
+    {id: 4 ,nombre: "Acelga", precio: 80,categoria:"verdura"},
     {id: 5 ,nombre: "Bolson de Frutas", precio: 100,categoria:"fruta,bolson"},
     {id: 6 ,nombre: "Bolson de Verduras", precio: 120,categoria:"verdura,bolson"},
     {id: 7 ,nombre: "Bolson Mixto", precio: 250,categoria:"fruta,verdura,bolson"},
@@ -114,7 +114,6 @@ const productoCatalogoHTML = (producto) => {
         }
 
         const mostrarFrutas = () => {
-
         mostrarListas(varFruta);
         };
         const mostrarVerduras = () => {
